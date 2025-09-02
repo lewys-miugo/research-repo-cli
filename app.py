@@ -120,3 +120,35 @@ def handle_papers():
             click.secho("Invalid choice! Please select 1-3", fg='red')
 
     return research_repository()
+
+def handle_topics():
+    while True:
+        click.secho(".....TOPICS.....", fg='yellow')
+        click.secho('   1. Add New Topic  \n   2. View All Topics  \n   3. Back to Main Menu', fg='blue')
+
+        topic_option = click.prompt("Select Topic Option", type=int)
+
+        if topic_option == 1:
+            click.secho('To add a new topic...', fg='blue')
+            name = click.prompt('Enter topic name', type=str)
+            description = click.prompt('Enter description (optional)', type=str, default='')
+            
+            if name:
+                add_topic(name, description or None)
+                click.secho('Topic added successfully', fg='green')
+                break
+            else:
+                click.secho('Topic name is required', fg='red')
+
+        elif topic_option == 2:
+            view_all_topics()
+            click.pause()
+            break
+
+        elif topic_option == 3:
+            break
+
+        else:
+            click.secho("Invalid choice! Please select 1-3", fg='red')
+
+    return research_repository()
