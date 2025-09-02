@@ -31,3 +31,42 @@ def research_repository():
     elif choice == 6:
         click.secho("Exiting program. Goodbye!", fg='green')
         return
+
+def handle_authors():
+    while True:
+        click.secho(".....AUTHORS.....", fg='yellow')
+        click.secho('   1. Add New Author  \n   2. View All Authors  \n   3. View Author Papers  \n   4. Back to Main Menu', fg='blue')
+
+        author_option = click.prompt("Select Author Option", type=int)
+
+        if author_option == 1:
+            click.secho('To add a new author...', fg='blue')
+            name = click.prompt('Enter author name', type=str)
+            affiliation = click.prompt('Enter affiliation (optional)', type=str, default='')
+            email = click.prompt('Enter email (optional)', type=str, default='')
+            
+            if name:
+                add_author(name, affiliation or None, email or None)
+                click.secho('Author added successfully', fg='green')
+                break
+            else:
+                click.secho('Author name is required', fg='red')
+
+        elif author_option == 2:
+            view_all_authors()
+            click.pause()
+            break
+
+        elif author_option == 3:
+            author_name = click.prompt('Enter author name to search', type=str)
+            get_author_papers(author_name)
+            click.pause()
+            break
+
+        elif author_option == 4:
+            break
+
+        else:
+            click.secho("Invalid choice! Please select 1-4", fg='red')
+
+    return research_repository()
