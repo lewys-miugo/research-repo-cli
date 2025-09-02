@@ -70,3 +70,53 @@ def handle_authors():
             click.secho("Invalid choice! Please select 1-4", fg='red')
 
     return research_repository()
+def handle_papers():
+    while True:
+        click.secho(".....PAPERS.....", fg='yellow')
+        click.secho('   1. Add New Paper  \n   2. View All Papers  \n   3. Back to Main Menu', fg='blue')
+
+        paper_option = click.prompt("Select Paper Option", type=int)
+
+        if paper_option == 1:
+            click.secho('To add a new paper...', fg='blue')
+            title = click.prompt('Enter paper title', type=str)
+            year = click.prompt('Enter publication year', type=int)
+            journal = click.prompt('Enter journal (optional)', type=str, default='')
+            author_name = click.prompt('Enter author name', type=str)
+            
+            # Optional topics
+            add_topics = click.confirm('Add topics to this paper?')
+            topic_names = []
+            if add_topics:
+                while True:
+                    topic = click.prompt('Enter topic name (or press Enter to finish)', type=str, default='')
+                    if not topic:
+                        break
+                    topic_names.append(topic)
+            
+            # Optional content
+            add_content = click.confirm('Add content/abstract to this paper?')
+            content = None
+            if add_content:
+                content = click.prompt('Enter paper content/abstract', type=str)
+            
+            if title and author_name:
+                add_paper(title, year, journal or None, author_name, 
+                         topic_names if topic_names else None, content)
+                click.secho('Paper added successfully', fg='green')
+                break
+            else:
+                click.secho('Title and author name are required', fg='red')
+
+        elif paper_option == 2:
+            view_all_papers()
+            click.pause()
+            break
+
+        elif paper_option == 3:
+            break
+
+        else:
+            click.secho("Invalid choice! Please select 1-3", fg='red')
+
+    return research_repository()
