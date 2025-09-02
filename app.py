@@ -70,6 +70,7 @@ def handle_authors():
             click.secho("Invalid choice! Please select 1-4", fg='red')
 
     return research_repository()
+
 def handle_papers():
     while True:
         click.secho(".....PAPERS.....", fg='yellow')
@@ -190,3 +191,6 @@ def handle_search_favorites():
             click.secho("Invalid choice! Please select 1-5", fg='red')
 
     return research_repository()
+
+if __name__ == "__main__":
+    research_repository()
