@@ -152,3 +152,41 @@ def handle_topics():
             click.secho("Invalid choice! Please select 1-3", fg='red')
 
     return research_repository()
+
+def handle_search_favorites():
+    while True:
+        click.secho(".....SEARCH & FAVORITES.....", fg='yellow')
+        click.secho('   1. Search Papers by Year  \n   2. Search Papers by Topic  \n   3. Toggle Paper Favorite  \n   4. View Favorite Papers  \n   5. Back to Main Menu', fg='blue')
+
+        search_option = click.prompt("Select Search Option", type=int)
+
+        if search_option == 1:
+            year = click.prompt('Enter publication year', type=int)
+            search_papers_by_year(year)
+            click.pause()
+            break
+
+        elif search_option == 2:
+            topic_name = click.prompt('Enter topic name', type=str)
+            search_papers_by_topic(topic_name)
+            click.pause()
+            break
+
+        elif search_option == 3:
+            paper_title = click.prompt('Enter paper title to toggle favorite', type=str)
+            toggle_favorite(paper_title)
+            click.pause()
+            break
+
+        elif search_option == 4:
+            view_favorites()
+            click.pause()
+            break
+
+        elif search_option == 5:
+            break
+
+        else:
+            click.secho("Invalid choice! Please select 1-5", fg='red')
+
+    return research_repository()
